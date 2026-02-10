@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Engineering and Computer Science Club">
+        <meta name="keywords"
+            content="engineering, computer, science, club, monterey, college, mpc, e/cs, california, community college, coding, code, education, learning, stem, steam, science, technology, math">
+        <meta name="description" content="Website for the Engineering and Computer Science Club of MPC">
+
+        <!-- <meta http-equiv="refresh" content="0; url='index.html'"> -->
+
+        <link rel="icon" href="images/favicon.ico">
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/header.css">
+        <link rel="stylesheet" href="styles/footer.css">
+        <link rel="stylesheet" href="styles/officers.css">
+        
+        <title>E/CS Club</title>
+    </head>
+    <body>
+        <!-- <a href="home.html">Redirect</a> -->
+        <header file-to-include="header.html"></header>
+        <div id="content" class="content"></div>
+        <footer file-to-include="footer.html"></footer>
+        <script type="text/javascript" src="scripts/includeHTML.js"></script>
+        <script type="text/javascript" src="scripts/hashRouter.js"></script>
+        <script type="text/javascript" src="scripts/main.js" defer></script>
+        <script>
+            includeHTML(function() {
+                console.log("All HTML (header/footer) loaded!");
+
+                // Look for the navbar items and assign active page
+                const currentHash = window.location.hash || "#home";
+                const activeLink = document.querySelector(`.navbar-item[href="${currentHash}"]`);
+                
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+                console.log("Current hash: ",activeLink);
+            });
+        </script>
+    </body>
+</html>

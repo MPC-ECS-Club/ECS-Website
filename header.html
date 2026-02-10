@@ -1,0 +1,20 @@
+<div class="header">
+    <h1 class="club-name">Engineering & Computer Science Club</h1>
+    <ul class="navbar">
+        <li><a href="#home" class="navbar-item" onclick="navigate('home.html',this)">Home</a></li>
+        <li><a href="#projects" class="navbar-item" onclick="navigate('projects.html',this)">Projects</a></li>
+        <li><a href="#members" class="navbar-item" onclick="navigate('members.html',this)">Members</a></li>
+        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdXsg9RcBYCK_DbuB4IGHtra4nUFefUUGC2N3HBbzWiPYpP0w/viewform"
+                rel=noopener target="_blank" class="navbar-item">Sign Up</a></li>
+        <!-- TODO: Update Calendar-->
+        <!-- <li><a href="#calendar" class="navbar-item" onclick="navigate('calendar.html',this)">Calendar</a></li> -->
+    </ul>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        // Get the current hash (e.g., "#projects")
+        const currentHash = window.location.hash;
+        console.log("CurrentHash", currentHash);
+        console.log("domcheck",document.getElementsByClassName("navbar-item").length);
+    });
+</script>
