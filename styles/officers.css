@@ -1,0 +1,82 @@
+/* Combined Officers & Members List */
+.cards-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    padding: 20px;
+    align-items: flex-start;
+    z-index:0;
+}
+
+/* Officer and Member Cards */
+.officer, .member {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 calc(22% - 20px); /* Four cards per row */
+    box-sizing: border-box;
+    min-height: 350px;
+    z-index: 5;
+}
+
+/* Hover effect */
+.officer:hover, .member:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Name, Position, and Major  */
+.officer-name, .member-name {
+    font-size: 1.2rem;     
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 5px 0;
+}
+
+.officer-position, .member-position {
+    font-size: 1rem;        
+    color: #555;            
+    margin: 2px 0;
+}
+
+.officer-major, .member-major {
+    font-size: 0.9rem;      
+    font-style: italic;     
+    color: #777;
+    margin: 2px 0;
+}
+
+/* Images for Officers and Members */
+.officer img, .member img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;   
+    object-fit: cover;    
+    margin-bottom: 15px;
+    margin: 0 auto;
+}
+
+.members {
+    padding-top: 15; /* smaller gap from the header */
+}
+
+.members h2 {
+    margin-bottom: 25px; /* space below the heading */
+    text-align: center;  
+}
+
+/* Stacking cards on smaller screens */
+@media (max-width: 768px) {
+    .officer, .member {
+        flex: 0 0 100%; /* One card per row */
+    }
+}

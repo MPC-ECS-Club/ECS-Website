@@ -1,0 +1,101 @@
+:root {
+    --mpc-red: rgb(134, 0, 56);
+}
+* {
+    font-family: "raleway";
+    line-height: 3vh;
+    /* "DejaVu Sans Mono", monospace; */
+    color: var(--mpc-red);
+    text-align: center;
+    /* border: solid 1px blue; */
+}
+
+body {
+    margin: 0;
+}
+
+h3 {
+    color: black;
+    text-decoration: underline;
+}
+
+.errorMsg {
+    font-size: 15vh;
+    padding-top: 5vh;
+}
+
+.errorTip {
+    font-size: 5vh;
+    color: gray;
+}
+
+p {
+    max-width: 700px;
+    text-align: center;
+    margin: auto;
+}
+
+/* .content li {
+    margin: 0;
+    padding: 0;
+    display: inline;
+} */
+
+.projectDisplay {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+.exImg {
+    align-self: center;
+    height: 50vh;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 2vh;
+    border: 3px inset var(--mpc-red);
+}
+
+.calendar {
+    width: min(90vw,11in);
+    height: 53vh;
+    text-align: center;
+    border: 0;
+    margin-top:1.5vh
+}
+
+/* Use this div around all site content. Should automatically handle spacing around header & footer*/
+.content {
+    /* Header height around 15vh*/
+    /* Footer height is 14vh*/
+    position: relative;
+    box-sizing: border-box;
+    /* padding-top: 17vh;
+    padding-bottom: 2vh; */
+    min-height: 67vh;
+    width: 100%;
+    max-width: 100vw;
+    /* margin-left: 0;
+    margin-right: 0; */
+    /* border: solid 2px gold; 
+    background: tan; */
+    padding: 0;
+    margin:0;
+    padding-bottom: 0;
+}
+
+/* .home h3,.home p,.home h2 {
+    border: solid 1px blue;
+    padding:0;
+    margin:0;
+} */
+/* .home {
+    box-sizing: border-box;
+    border: solid 1px green;
+    background: lightblue;
+} */
+/* .header {
+    padding: 0;
+    margin: 0;
+    background: orange;
+} */

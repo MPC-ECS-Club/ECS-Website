@@ -1,0 +1,81 @@
+:root {
+    --navbar-height:  
+}
+* {
+    color: var(--mpc-red);
+    text-align: center;
+
+}
+
+body {
+    margin: 0
+}
+
+header {
+    position:sticky;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    align-self: flex-start;
+    z-index: 999;
+}
+
+.club-name {
+    background: var(--mpc-red);
+    color: rgb(255, 255, 255);
+    font-size: min(4vw, 4vh);
+    padding: 2.25vh 0 2.25vh 0;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.navbar {
+    box-sizing: border-box;
+    z-index: 10;
+    width: 100%;
+    /* float: left; */
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    /* Removes whitespace */
+    /* font-size: 0; */
+    flex-flow: row nowrap;
+    justify-content: center;
+    /* border: solid 1px green; */
+}
+
+.navbar li {
+    flex: 1 1 auto;
+    box-sizing: border-box;
+    /* border: solid 1px cyan; */
+}
+.navbar-item {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 2vh 0 2vh 0;
+    font-size: min(2.5vw, 2.5vh);
+    background-color: gray;
+    color: white;
+    white-space: none;
+    text-decoration: none;
+    width: 100%;
+    border: solid 1px black;
+}
+
+/* .navbar-item:visited,
+.navbar-item:link {
+    background-color: gray;
+    color: white;
+} */
+
+.navbar-item:hover {
+    background-color: dimgrey;
+    color: white;
+    font-weight: bolder;
+}
+
+.navbar-item.active {
+    background-color: var(--mpc-red);
+    /* color: black; */
+}

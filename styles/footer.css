@@ -1,0 +1,47 @@
+.footer {
+    width: 100%;
+    text-align: center;
+    height: min-content;
+    font-size: 0;
+    background-color: var(--mpc-red);
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: sticky;
+    bottom: 0;
+    box-sizing: border-box;
+    border: solid 1px blue;
+}
+
+
+.footerImg {
+    margin: 3vh 3vw 3vh 3vw;
+    height: 8vh;
+    padding: 0;
+    /* animation-name: spin_icons;
+    animation-play-state: paused; */
+}
+.footerImg:hover {
+    margin: 3vh 3vw 3vh 3vw;
+    height: 8vh;
+    padding: 0;
+    animation: spin_icons 0.1s linear 0s infinite;
+    animation-play-state: running;
+}
+
+@keyframes spin_icons {
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.footer li {
+    margin: 0;
+    padding: 0;
+    height: 0;
+    width: 0;
+    display: inline;
+}
