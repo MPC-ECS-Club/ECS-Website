@@ -2,7 +2,7 @@
     --mpc-red: rgb(134, 0, 56);
 }
 * {
-    font-family: "raleway";
+    font-family: "Raleway";
     line-height: 3vh;
     /* "DejaVu Sans Mono", monospace; */
     color: var(--mpc-red);
@@ -98,4 +98,5 @@ p {
     padding: 0;
     margin: 0;
     background: orange;
+
 } */
