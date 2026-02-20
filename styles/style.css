@@ -54,6 +54,7 @@ p {
     margin-left: auto;
     margin-bottom: 2vh;
     border: 3px inset var(--mpc-red);
+    max-width: 100%;
 }
 
 .calendar {
@@ -105,4 +106,5 @@ p {
     background: orange;
 
 } */
+
 
