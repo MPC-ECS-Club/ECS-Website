@@ -4,7 +4,7 @@
     "role": "President",
     "major": "Electrical Engineering",
     "image": "https://drive.google.com/thumbnail?id=1lv1gtvdP7BZXWwxLVW2ONzg9SC-ECCWT",
-    "alt": "president photo",
+    "alt": "President Photo",
     "type": "officer"
   },
   {
@@ -24,9 +24,9 @@
     "type": "officer"
   },
   {
-    "name": "OLIVIA BARTLE",
+    "name": "Spot Open",
     "role": "Treasurer",
-    "major": "Data Science",
+    "major": "",
     "image": "images/happy-caterpillar.webp",
     "alt": "Treasurer photo",
     "type": "officer"
@@ -43,7 +43,7 @@
     "name": "SEBASTIAN RUEDA",
     "role": "CS Co-Lead",
     "major": "Computer Science",
-    "image": "images/happy-caterpillar.webp",
+    "image": "images/people/sebastian-rueda.webp",
     "alt": "Co-CS Lead Photo",
     "type": "officer",
     "hoverMessage": "Hii! Click me!",
@@ -51,10 +51,10 @@
   },
   {
     "name": "PAOLO MORALES",
-    "role": "ICC Rep",
+    "role": "Club Representative",
     "major": "Mechanical Engineering",
     "image": "images/people/paolo.webp",
-    "alt": "ICC Rep photo",
+    "alt": "Club Representative Photo",
     "type": "officer"
   },
   {
@@ -69,6 +69,14 @@
     "name": "Moises Ballesteros",
     "role": "Member",
     "major": "Computer Science",
+    "image": "images/happy-caterpillar.webp",
+    "alt": "Member photo",
+    "type": "member"
+  },
+  {
+    "name": "Nick Christianson",
+    "role": "Member",
+    "major": "Mechanical Engineering",
     "image": "images/happy-caterpillar.webp",
     "alt": "Member photo",
     "type": "member"
