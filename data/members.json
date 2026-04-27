@@ -46,7 +46,8 @@
     "image": "images/happy-caterpillar.webp",
     "alt": "Co-CS Lead Photo",
     "type": "officer",
-    "hoverMessage": "hiiiii"
+    "hoverMessage": "Hii! Click me!",
+    "redirect": "https://www.linkedin.com/in/sebastian-rueda-villamil/"
   },
   {
     "name": "PAOLO MORALES",

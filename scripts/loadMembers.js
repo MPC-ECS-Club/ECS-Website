@@ -7,7 +7,7 @@ async function loadMembers() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const members = await response.json();
-        
+
         const container = document.getElementById('tree-container');
         if (!container) return; // Exit if container is not found
 
@@ -41,7 +41,7 @@ async function loadMembers() {
             if (tierMembers.length === 0) return null;
             const ul = document.createElement('ul');
             ul.className = 'tier';
-            
+
             tierMembers.forEach(person => {
                 const li = document.createElement('li');
                 li.className = person.type === 'officer' ? 'officer' : 'member';
@@ -74,6 +74,12 @@ async function loadMembers() {
                     li.appendChild(tooltip);
                 }
 
+                if (person.redirect) {
+                    li.addEventListener('click', () => {
+                        window.open(person.redirect, '_blank');
+                    });
+                }
+
                 ul.appendChild(li);
             });
             return ul;
@@ -86,7 +92,7 @@ async function loadMembers() {
                 container.appendChild(ul);
             }
         });
-        
+
         setupToggleButton();
     } catch (error) {
         console.error("Failed to load members:", error);
@@ -104,9 +110,9 @@ async function loadRetiredMembers() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const retiredMembers = await response.json();
-        
+
         const container = document.getElementById('tree-container');
-        if (!container) return; 
+        if (!container) return;
 
         container.innerHTML = '';
 
@@ -117,7 +123,7 @@ async function loadRetiredMembers() {
 
         const ul = document.createElement('ul');
         ul.className = 'cards-list'; // Use the original flat flex grid style
-        
+
         // Remove the 'tree' class temporarily so the vertical alignment and pseudo-elements from .tree don't mess up the flat grid
         container.classList.remove('tree');
 
@@ -155,7 +161,7 @@ async function loadRetiredMembers() {
 
             ul.appendChild(li);
         });
-        
+
         container.appendChild(ul);
 
     } catch (error) {
@@ -170,11 +176,11 @@ async function loadRetiredMembers() {
 function setupToggleButton() {
     const btn = document.getElementById('toggle-past-members');
     if (!btn) return;
-    
+
     // Make sure we don't attach multiple listeners
     const newBtn = btn.cloneNode(true);
     btn.parentNode.replaceChild(newBtn, btn);
-    
+
     newBtn.addEventListener('click', () => {
         showingRetired = !showingRetired;
         if (showingRetired) {
