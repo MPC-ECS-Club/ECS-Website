@@ -88,8 +88,10 @@ p {
 } */
 
 .projectDisplay {
-    padding-left: 10px;
-    padding-right: 10px;
+    display: grid;
+    text-align: center;
+    place-items: center;
+    list-style: none;
 }
 
 
