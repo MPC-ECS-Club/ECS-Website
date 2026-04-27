@@ -10,7 +10,7 @@
     position: sticky;
     bottom: 0;
     box-sizing: border-box;
-    border: solid 1px blue;
+    border: solid 1px var(--footer-border);
 }
 
 

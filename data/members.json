@@ -1,0 +1,74 @@
+[
+  {
+    "name": "JORDI NIEVES",
+    "role": "President",
+    "major": "Electrical Engineering",
+    "image": "https://drive.google.com/thumbnail?id=1lv1gtvdP7BZXWwxLVW2ONzg9SC-ECCWT",
+    "alt": "president photo",
+    "type": "officer"
+  },
+  {
+    "name": "JD INSERT LAST NAME",
+    "role": "Vice President",
+    "major": "Electrical Engineering",
+    "image": "images/happy-caterpillar.webp",
+    "alt": "Vice President photo",
+    "type": "officer"
+  },
+  {
+    "name": "JEAN-LUC MADRID",
+    "role": "Secretary",
+    "major": "Insert Major",
+    "image": "images/happy-caterpillar.webp",
+    "alt": "Secretary photo",
+    "type": "officer"
+  },
+  {
+    "name": "OLIVIA BARTLE",
+    "role": "Treasurer",
+    "major": "Data Science",
+    "image": "images/happy-caterpillar.webp",
+    "alt": "Treasurer photo",
+    "type": "officer"
+  },
+  {
+    "name": "JASON LAM",
+    "role": "CS Lead",
+    "major": "Computer Science",
+    "image": "images/people/jason.webp",
+    "alt": "CS Lead Photo",
+    "type": "officer"
+  },
+  {
+    "name": "SEBASTIAN RUEDA",
+    "role": "CS Co-Lead",
+    "major": "Computer Science",
+    "image": "images/happy-caterpillar.webp",
+    "alt": "Co-CS Lead Photo",
+    "type": "officer"
+  },
+  {
+    "name": "PAOLO MORALES",
+    "role": "ICC Rep",
+    "major": "Mechanical Engineering",
+    "image": "images/people/paolo.webp",
+    "alt": "ICC Rep photo",
+    "type": "officer"
+  },
+  {
+    "name": "Perla Gonzalez",
+    "role": "Member",
+    "major": "Electrical Engineering",
+    "image": "images/happy-caterpillar.webp",
+    "alt": "Member photo",
+    "type": "member"
+  },
+  {
+    "name": "Moises Ballesteros",
+    "role": "Member",
+    "major": "Computer Science",
+    "image": "images/happy-caterpillar.webp",
+    "alt": "Member photo",
+    "type": "member"
+  }
+]

@@ -51,8 +51,12 @@ function navigate(page, caller) {
         //4 idicates a success
         if (this.readyState == 4) {
             if (this.status == 200) { 
-                //
                 document.getElementById("content").innerHTML = this.responseText; 
+                
+                // If we navigated to members.html, load the members data
+                if (page === "members.html" && typeof loadMembers === "function") {
+                    loadMembers();
+                }
 
                 //includeHTML(null, document.getElementById("content"));
             }
@@ -65,7 +69,9 @@ function navigate(page, caller) {
     console.log(previousLink);
     const currentHash = window.location.hash || "#home";
     const activeLink = document.querySelector(`.navbar-item[href="${currentHash}"]`);
-    previousLink[0].classList.remove('active');
+    if (previousLink.length > 0) {
+        previousLink[0].classList.remove('active');
+    }
     if (activeLink) {
         activeLink.classList.add('active');
     }

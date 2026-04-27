@@ -1,21 +1,46 @@
 :root {
     --mpc-red: rgb(134, 0, 56);
+    --bg-color: #ffffff;
+    --text-color: black;
+    --card-bg: #f4f4f4;
+    --card-text: #555;
+    --card-desc: #777;
+    --nav-bg: gray;
+    --nav-text: white;
+    --nav-hover: dimgrey;
+    --footer-border: blue;
 }
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --card-bg: #1e1e1e;
+    --card-text: #cccccc;
+    --card-desc: #aaaaaa;
+    --nav-bg: #2d2d2d;
+    --nav-text: #e0e0e0;
+    --nav-hover: #404040;
+    --footer-border: #444;
+}
+
 * {
     font-family: "Raleway";
     line-height: 3vh;
     /* "DejaVu Sans Mono", monospace; */
-    color: var(--mpc-red);
+    color: var(--text-color);
     text-align: center;
     /* border: solid 1px blue; */
 }
 
 body {
     margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h3 {
-    color: black;
+    color: var(--text-color);
     text-decoration: underline;
 }
 

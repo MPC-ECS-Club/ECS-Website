@@ -12,12 +12,12 @@
 
 /* Officer and Member Cards */
 .officer, .member {
-    background: #f4f4f4;
+    background: var(--card-bg);
     padding: 20px;
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, background 0.3s ease;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -44,14 +44,14 @@
 
 .officer-position, .member-position {
     font-size: 1rem;        
-    color: #555;            
+    color: var(--card-text);            
     margin: 2px 0;
 }
 
 .officer-major, .member-major {
     font-size: 0.9rem;      
     font-style: italic;     
-    color: #777;
+    color: var(--card-desc);
     margin: 2px 0;
 }
 

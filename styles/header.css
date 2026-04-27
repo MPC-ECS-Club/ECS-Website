@@ -2,7 +2,7 @@
     --navbar-height:  
 }
 * {
-    color: var(--mpc-red);
+    color: var(--text-color);
     text-align: center;
 
 }
@@ -55,12 +55,13 @@ header {
     box-sizing: border-box;
     padding: 2vh 0 2vh 0;
     font-size: min(2.5vw, 2.5vh);
-    background-color: gray;
-    color: white;
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
     white-space: none;
     text-decoration: none;
     width: 100%;
-    border: solid 1px black;
+    border: solid 1px var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* .navbar-item:visited,
@@ -70,8 +71,8 @@ header {
 } */
 
 .navbar-item:hover {
-    background-color: dimgrey;
-    color: white;
+    background-color: var(--nav-hover);
+    color: var(--nav-text);
     font-weight: bolder;
 }
 

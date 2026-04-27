@@ -37,10 +37,16 @@
         </div>
         <script type="text/javascript" src="scripts/includeHTML.js"></script>
         <script type="text/javascript" src="scripts/hashRouter.js"></script>
+        <script type="text/javascript" src="scripts/loadMembers.js"></script>
         <script type="text/javascript" src="scripts/main.js" defer></script>
         <script>
             includeHTML(function() {
                 console.log("All HTML (header/footer) loaded!");
+
+                // Initialize theme toggle logic
+                if (typeof setupThemeToggle === "function") {
+                    setupThemeToggle();
+                }
 
                 // Look for the navbar items and assign active page
                 const currentHash = window.location.hash || "#home";
