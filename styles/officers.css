@@ -1,4 +1,13 @@
-/* Combined Officers & Members List */
+/* Tree Container */
+.tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    z-index: 0;
+}
+
+/* Original Flat Grid for Past Members */
 .cards-list {
     list-style: none;
     display: flex;
@@ -8,6 +17,32 @@
     padding: 20px;
     align-items: flex-start;
     z-index:0;
+}
+
+/* Individual Tiers */
+.tier {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px 0 40px 0;
+    margin: 0;
+    position: relative;
+    width: 100%;
+}
+
+/* Connecting Lines */
+/* Line connecting tier to tier below */
+.tier:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 40px;
+    background-color: var(--card-text);
 }
 
 /* Officer and Member Cards */
@@ -26,6 +61,32 @@
     box-sizing: border-box;
     min-height: 350px;
     z-index: 5;
+    position: relative;
+}
+
+/* Top line for cards (except first tier) */
+.tier:not(:first-child) li::before {
+    content: '';
+    position: absolute;
+    top: -20px; /* Half of the tier gap */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 20px;
+    background-color: var(--card-text);
+}
+
+/* Horizontal line connecting siblings (except first tier) */
+.tier:not(:first-child)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 300px); /* Approximate width based on flex gap */
+    height: 2px;
+    background-color: var(--card-text);
+    max-width: max-content;
 }
 
 /* Hover effect */
@@ -78,5 +139,10 @@
 @media (max-width: 768px) {
     .officer, .member {
         flex: 0 0 100%; /* One card per row */
+    }
+    
+    /* Hide horizontal lines on mobile since they stack vertically */
+    .tier:not(:first-child)::before {
+        display: none;
     }
 }
