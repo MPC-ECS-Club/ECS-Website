@@ -76,17 +76,4 @@ function navigate(page, caller) {
         activeLink.classList.add('active');
     }
     console.log("Current hash: ",activeLink);
-    // var navlist = document.getElementsByClassName("navbar-item");
-    // console.log("Number of Items in NavList: ",navlist.length);
-    // for(var i=0; i<navlist.length; i++) {
-    //     console.log("workpls",navlist[i].getAttribute('onclick')=="navigate(\'"+page+"\')");
-    //     console.log("ATTRIBUTE",navlist[i].getAttribute('onclick'));
-    //     if(navlist[i].getAttribute('onclick')=="navigate(\'"+page+"\')"){
-    //         navlist[i].classList.add('active');
-    //         console.log("ADDED");
-    //     }
-    //     else{
-    //         console.log("NO");
-    //     }
-    // }   
 }
