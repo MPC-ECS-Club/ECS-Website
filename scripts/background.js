@@ -2,95 +2,84 @@ const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
 
 let width, height;
-let points = [];
-const spacing = 40;
-const mouseRadius = 120; // Reduced radius
-const mouse = { x: -1000, y: -1000, lastX: -1000, lastY: -1000, vx: 0, vy: 0 };
-let mouseMoving = false;
-let moveTimer;
+const spacing = 50;
+let cols, rows;
+
+// Define autonomous spotlights
+const spotlights = [
+    { x: 100, y: 100, vx: 0.5, vy: 0.7, radius: 500 },
+    { x: 300, y: 500, vx: -0.6, vy: 0.4, radius: 600 },
+    { x: 800, y: 200, vx: 0.4, vy: -0.5, radius: 550 }
+];
 
 function init() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
-    points = [];
-
-    for (let x = 0; x < width + spacing; x += spacing) {
-        for (let y = 0; y < height + spacing; y += spacing) {
-            points.push({
-                x: x,
-                y: y,
-                baseX: x,
-                baseY: y,
-                vx: 0,
-                vy: 0
-            });
-        }
-    }
+    cols = Math.ceil(width / spacing) + 1;
+    rows = Math.ceil(height / spacing) + 1;
 }
 
 window.addEventListener('resize', init);
-window.addEventListener('mousemove', (e) => {
-    mouse.vx = e.clientX - mouse.x;
-    mouse.vy = e.clientY - mouse.y;
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-    
-    mouseMoving = true;
-    clearTimeout(moveTimer);
-    moveTimer = setTimeout(() => {
-        mouseMoving = false;
-    }, 100);
-});
 
-function animate(time) {
+function animate() {
     ctx.clearRect(0, 0, width, height);
     
-    // Determine dot color based on theme
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    ctx.fillStyle = isDark ? 'rgba(226, 232, 240, 0.12)' : 'rgba(155, 17, 58, 0.08)';
+    
+    // Update spotlight positions
+    spotlights.forEach(s => {
+        s.x += s.vx;
+        s.y += s.vy;
 
-    // Slowly decay mouse velocity
-    mouse.vx *= 0.9;
-    mouse.vy *= 0.9;
+        // Bounce off edges
+        if (s.x < -s.radius / 2 || s.x > width + s.radius / 2) s.vx *= -1;
+        if (s.y < -s.radius / 2 || s.y > height + s.radius / 2) s.vy *= -1;
+    });
 
-    for (let i = 0; i < points.length; i++) {
-        const p = points[i];
-        
-        // Waving animation (fabric-like)
-        const waveX = Math.sin(time * 0.0012 + (p.baseY * 0.005)) * 6;
-        const waveY = Math.cos(time * 0.0012 + (p.baseX * 0.005)) * 6;
-
-        // Mouse interaction - Only if moving
-        if (mouseMoving) {
-            const dx = mouse.x - p.x;
-            const dy = mouse.y - p.y;
-            const distSq = dx * dx + dy * dy;
+    // Draw the static grid with spotlight illumination
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            const x = c * spacing;
+            const y = r * spacing;
             
-            if (distSq < mouseRadius * mouseRadius) {
-                const dist = Math.sqrt(distSq);
-                const force = (mouseRadius - dist) / mouseRadius;
+            const drawConnection = (x1, y1, x2, y2) => {
+                const midX = (x1 + x2) / 2;
+                const midY = (y1 + y2) / 2;
                 
-                // Displacement based on mouse velocity + slight push away
-                // This prevents the static circle and makes it feel like "dragging" through water/fabric
-                p.vx += mouse.vx * force * 0.2;
-                p.vy += mouse.vy * force * 0.2;
+                // Calculate total illumination from all spotlights
+                let maxIllumination = 0;
+                spotlights.forEach(s => {
+                    const dx = midX - s.x;
+                    const dy = midY - s.y;
+                    const distSq = dx * dx + dy * dy;
+                    const radSq = s.radius * s.radius;
+                    if (distSq < radSq) {
+                        const illumination = 1 - (distSq / radSq);
+                        if (illumination > maxIllumination) maxIllumination = illumination;
+                    }
+                });
+                
+                const baseAlpha = isDark ? 0.03 : 0.04;
+                const alpha = baseAlpha + (maxIllumination * 0.05);
+                
+                ctx.beginPath();
+                ctx.strokeStyle = isDark ? `rgba(226, 232, 240, ${alpha})` : `rgba(155, 17, 58, ${alpha})`;
+                ctx.lineWidth = 1;
+                
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+            };
+
+            // Connect to right
+            if (c < cols - 1) {
+                drawConnection(x, y, x + spacing, y);
+            }
+            // Connect to bottom
+            if (r < rows - 1) {
+                drawConnection(x, y, x, y + spacing);
             }
         }
-
-        // Return to base position with spring physics
-        p.vx += (p.baseX + waveX - p.x) * 0.025;
-        p.vy += (p.baseY + waveY - p.y) * 0.025;
-        
-        // Friction/Damping
-        p.vx *= 0.91;
-        p.vy *= 0.91;
-        
-        p.x += p.vx;
-        p.y += p.vy;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 1, 0, Math.PI * 2);
-        ctx.fill();
     }
 
     requestAnimationFrame(animate);

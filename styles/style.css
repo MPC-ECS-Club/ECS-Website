@@ -150,35 +150,20 @@ p {
     z-index: 1;
 }
 
-.btn::before,
-.btn::after {
+.btn::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
+    inset: 0;
     background-color: var(--mpc-red-hover);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+    transform: scale(0);
+    transform-origin: center;
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
     z-index: -1;
-    opacity: 0;
-}
-
-.btn:hover::before,
-.btn:hover::after {
-    width: 250%;
-    height: 350%;
-    opacity: 1;
+    border-radius: inherit;
 }
 
 .btn:hover::before {
-    animation: cloud-wave-1 8s infinite linear;
-}
-
-.btn:hover::after {
-    animation: cloud-wave-2 10s infinite linear reverse;
-    background-color: rgba(122, 13, 46, 0.6);
+    transform: scale(1);
 }
 
 .btn:hover {
@@ -186,20 +171,6 @@ p {
     box-shadow: 0 8px 25px rgba(155, 17, 58, 0.4);
 }
 
-/* Re-using keyframes from header if they exist globally, or defining them here if needed. 
-   Since they are in header.css, I'll move them to style.css for global use. */
-@keyframes cloud-wave-1 {
-    0% { border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-    33% { border-radius: 60% 40% 40% 60% / 30% 70% 40% 60%; transform: translate(-50%, -50%) rotate(120deg) scale(1.1); }
-    66% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; transform: translate(-50%, -50%) rotate(240deg) scale(0.9); }
-    100% { border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; transform: translate(-50%, -50%) rotate(360deg) scale(1); }
-}
-
-@keyframes cloud-wave-2 {
-    0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: translate(-50%, -50%) rotate(0deg) scale(1.2); }
-    50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; transform: translate(-50%, -50%) rotate(180deg) scale(1); }
-    100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: translate(-50%, -50%) rotate(360deg) scale(1.2); }
-}
 
 /* Section Titles */
 .section-title {
