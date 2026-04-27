@@ -66,6 +66,14 @@ async function loadMembers() {
                 li.appendChild(h3);
                 li.appendChild(pRole);
                 li.appendChild(pMajor);
+
+                if (person.hoverMessage) {
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'member-tooltip';
+                    tooltip.textContent = person.hoverMessage;
+                    li.appendChild(tooltip);
+                }
+
                 ul.appendChild(li);
             });
             return ul;
@@ -137,6 +145,13 @@ async function loadRetiredMembers() {
             li.appendChild(h3);
             li.appendChild(pRole);
             li.appendChild(pMajor);
+
+            if (person.hoverMessage) {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'member-tooltip';
+                tooltip.textContent = person.hoverMessage;
+                li.appendChild(tooltip);
+            }
 
             ul.appendChild(li);
         });

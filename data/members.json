@@ -45,7 +45,8 @@
     "major": "Computer Science",
     "image": "images/happy-caterpillar.webp",
     "alt": "Co-CS Lead Photo",
-    "type": "officer"
+    "type": "officer",
+    "hoverMessage": "hiiiii"
   },
   {
     "name": "PAOLO MORALES",

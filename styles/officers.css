@@ -16,7 +16,7 @@
     justify-content: center;
     padding: 20px;
     align-items: flex-start;
-    z-index:0;
+    z-index: 0;
 }
 
 /* Individual Tiers */
@@ -48,27 +48,67 @@
 /* Officer and Member Cards */
 .officer, .member {
     background: var(--card-bg);
-    padding: 20px;
-    border-radius: 12px;
+    padding: 2.5rem;
+    border-radius: 20px;
     text-align: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease, background 0.3s ease;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    flex: 0 0 calc(22% - 20px); /* Four cards per row */
+    flex: 0 1 280px;
     box-sizing: border-box;
-    min-height: 350px;
+    min-height: 400px;
     z-index: 5;
     position: relative;
+    overflow: visible; /* Ensure tooltip isn't clipped */
+}
+
+.member-tooltip {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translate(-50%, -10px);
+    background: var(--mpc-red);
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.member-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--mpc-red);
+}
+
+.officer:hover .member-tooltip, 
+.member:hover .member-tooltip {
+    opacity: 1;
+    top: -15px;
+    transform: translate(-50%, -100%);
 }
 
 /* Top line for cards (except first tier) */
 .tier:not(:first-child) li::before {
     content: '';
     position: absolute;
-    top: -20px; /* Half of the tier gap */
+    top: -20px;
+    /* Half of the tier gap */
     left: 50%;
     transform: translateX(-50%);
     width: 2px;
@@ -83,64 +123,75 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: calc(100% - 300px); /* Approximate width based on flex gap */
+    width: calc(100% - 300px);
+    /* Approximate width based on flex gap */
     height: 2px;
     background-color: var(--card-text);
     max-width: max-content;
 }
 
 /* Hover effect */
-.officer:hover, .member:hover {
+.officer:hover,
+.member:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Name, Position, and Major  */
-.officer-name, .member-name {
-    font-size: 1.2rem;     
+.officer-name,
+.member-name {
+    font-size: 1.2rem;
     font-weight: bold;
     text-transform: uppercase;
     margin: 5px 0;
 }
 
-.officer-position, .member-position {
-    font-size: 1rem;        
-    color: var(--card-text);            
+.officer-position,
+.member-position {
+    font-size: 1rem;
+    color: var(--card-text);
     margin: 2px 0;
 }
 
-.officer-major, .member-major {
-    font-size: 0.9rem;      
-    font-style: italic;     
+.officer-major,
+.member-major {
+    font-size: 0.9rem;
+    font-style: italic;
     color: var(--card-desc);
     margin: 2px 0;
 }
 
 /* Images for Officers and Members */
-.officer img, .member img {
+.officer img,
+.member img {
     width: 140px;
     height: 140px;
-    border-radius: 50%;   
-    object-fit: cover;    
+    border-radius: 50%;
+    object-fit: cover;
     margin-bottom: 15px;
     margin: 0 auto;
 }
 
 .members {
-    padding-top: 15; /* smaller gap from the header */
+    padding-top: 15;
+    /* smaller gap from the header */
 }
 
 .members h2 {
-    margin-bottom: 25px; /* space below the heading */
-    text-align: center;  
+    margin-bottom: 25px;
+    /* space below the heading */
+    text-align: center;
 }
 
 /* Stacking cards on smaller screens */
 @media (max-width: 768px) {
-    .officer, .member {
-        flex: 0 0 100%; /* One card per row */
+
+    .officer,
+    .member {
+        flex: 0 0 100%;
+        /* One card per row */
     }
-    
+
     /* Hide horizontal lines on mobile since they stack vertically */
     .tier:not(:first-child)::before {
         display: none;
