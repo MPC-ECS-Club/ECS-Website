@@ -1,65 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Engineering and Computer Science Club">
-        <meta name="keywords"
-            content="engineering, computer, science, club, monterey, college, mpc, e/cs, california, community college, coding, code, education, learning, stem, steam, science, technology, math">
-        <meta name="description" content="Website for the Engineering and Computer Science Club of MPC">
-        
-        <!-- meta tag for Google search engine crawler (currently linked to personal account)-->
-        <!-- TODO: Change/add meta tag for official club account metatag -->
-        <meta name="google-site-verification" content="gP35IFXNNPw-UDud5nbMGpntPl9vTVAqbdiUDQSHb-U" />
 
-        <!-- <meta http-equiv="refresh" content="0; url='index.html'"> -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Engineering and Computer Science Club">
+    <meta name="keywords"
+        content="engineering, computer, science, club, monterey, college, mpc, e/cs, california, community college, coding, code, education, learning, stem, steam, science, technology, math">
+    <meta name="description" content="Website for the Engineering and Computer Science Club of MPC">
 
-        <!-- Raleway font from Google-->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        
-        <link rel="icon" href="images/favicon.ico">
-        <link rel="stylesheet" href="styles/style.css">
-        <link rel="stylesheet" href="styles/header.css">
-        <link rel="stylesheet" href="styles/footer.css">
-        <link rel="stylesheet" href="styles/officers.css">
-        
-        <title>E/CS Club</title>
-    </head>
-    <body>
-        <!-- <a href="home.html">Redirect</a> -->
-        
-        <div class="main-wrapper">
-            <header file-to-include="header.html"></header>
-            <div id="content" class="content"></div>
-            <footer file-to-include="footer.html"></footer>
-        </div>
-        <script type="text/javascript" src="scripts/includeHTML.js"></script>
-        <script type="text/javascript" src="scripts/hashRouter.js"></script>
-        <script type="text/javascript" src="scripts/loadMembers.js"></script>
-        <script type="text/javascript" src="scripts/main.js" defer></script>
-        <script>
-            includeHTML(function() {
-                console.log("All HTML (header/footer) loaded!");
+    <!-- meta tag for Google search engine crawler (currently linked to personal account)-->
+    <!-- TODO: Change/add meta tag for official club account metatag -->
+    <meta name="google-site-verification" content="gP35IFXNNPw-UDud5nbMGpntPl9vTVAqbdiUDQSHb-U" />
 
-                // Initialize theme toggle logic
-                if (typeof setupThemeToggle === "function") {
-                    setupThemeToggle();
-                }
+    <!-- <meta http-equiv="refresh" content="0; url='index.html'"> -->
 
-                // Look for the navbar items and assign active page
-                const currentHash = window.location.hash || "#home";
-                const activeLink = document.querySelector(`.navbar-item[href="${currentHash}"]`);
-                
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                }
-                console.log("Current hash: ",activeLink);
-            });
-        </script>
-    </body>
+    <!-- Raleway font from Google-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/officers.css">
+
+    <title>E/CS Club</title>
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+    <div class="main-wrapper">
+        <header file-to-include="header.html"></header>
+        <div id="content" class="content"></div>
+        <footer file-to-include="footer.html"></footer>
+    </div>
+    <script type="text/javascript" src="scripts/includeHTML.js"></script>
+    <script type="text/javascript" src="scripts/hashRouter.js"></script>
+    <script type="text/javascript" src="scripts/loadMembers.js"></script>
+    <script type="text/javascript" src="scripts/background.js"></script>
+    <script type="text/javascript" src="scripts/main.js" defer></script>
+    <script>
+        includeHTML(function () {
+            console.log("All HTML (header/footer) loaded!");
+
+            // Initialize theme toggle logic
+            if (typeof setupThemeToggle === "function") {
+                setupThemeToggle();
+            }
+
+            // Look for the navbar items and assign active page
+            const currentHash = window.location.hash || "#home";
+            const activeLink = document.querySelector(`.navbar-item[href="${currentHash}"]`);
+
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            console.log("Current hash: ", activeLink);
+        });
+    </script>
+</body>
 
 </html>
-
-

@@ -1,82 +1,105 @@
-:root {
-    --navbar-height:  
-}
-* {
-    color: var(--text-color);
-    text-align: center;
-
-}
-
-body {
-    margin: 0
-}
-
 header {
-    position:sticky;
+    position: sticky;
     top: 0;
     width: 100%;
-    text-align: center;
-    align-self: flex-start;
     z-index: 999;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .club-name {
+    width: 100%;
     background: var(--mpc-red);
     color: rgb(255, 255, 255);
-    font-size: min(4vw, 4vh);
-    padding: 2.25vh 0 2.25vh 0;
+    font-size: min(4vw, 3vh);
+    padding: 1.5vh 0;
     margin: 0;
     white-space: nowrap;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .navbar {
     box-sizing: border-box;
-    z-index: 10;
     width: 100%;
-    /* float: left; */
+    max-width: 1000px;
     display: flex;
-    margin: 0;
-    padding: 0;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
     list-style-type: none;
-    /* Removes whitespace */
-    /* font-size: 0; */
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     justify-content: center;
-    /* border: solid 1px green; */
+    gap: 1rem;
 }
 
 .navbar li {
-    flex: 1 1 auto;
-    box-sizing: border-box;
-    /* border: solid 1px cyan; */
-}
-.navbar-item {
-    display: inline-block;
-    box-sizing: border-box;
-    padding: 2vh 0 2vh 0;
-    font-size: min(2.5vw, 2.5vh);
-    background-color: var(--nav-bg);
-    color: var(--nav-text);
-    white-space: none;
-    text-decoration: none;
-    width: 100%;
-    border: solid 1px var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
 }
 
-/* .navbar-item:visited,
-.navbar-item:link {
-    background-color: gray;
-    color: white;
-} */
+.navbar-item {
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    color: var(--nav-text);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 30px;
+    transition: color 0.3s ease;
+    background: transparent;
+    border: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.navbar-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--mpc-red);
+    transform: scale(0);
+    transform-origin: center;
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: -1;
+    border-radius: inherit;
+}
 
 .navbar-item:hover {
-    background-color: var(--nav-hover);
-    color: var(--nav-text);
-    font-weight: bolder;
+    color: white;
+}
+
+.navbar-item:hover::before {
+    transform: scale(1);
 }
 
 .navbar-item.active {
     background-color: var(--mpc-red);
-    /* color: black; */
+    color: white;
+    box-shadow: 0 4px 12px rgba(155, 17, 58, 0.3);
+}
+
+.navbar-item.active::before,
+.navbar-item.active::after {
+    display: none;
+}
+
+.theme-toggle {
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.2) rotate(15deg);
 }

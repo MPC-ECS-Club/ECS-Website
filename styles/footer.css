@@ -1,47 +1,40 @@
 .footer {
     width: 100%;
-    text-align: center;
-    height: min-content;
-    font-size: 0;
-    background-color: var(--mpc-red);
+    background-color: var(--bg-color);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 0;
     list-style-type: none;
-    margin: 0;
-    padding: 0;
-    position: sticky;
-    bottom: 0;
-    box-sizing: border-box;
-    border: solid 1px var(--footer-border);
-}
-
-
-.footerImg {
-    margin: 3vh 3vw 3vh 3vw;
-    height: 8vh;
-    padding: 0;
-    /* animation-name: spin_icons;
-    animation-play-state: paused; */
-}
-.footerImg:hover {
-    margin: 3vh 3vw 3vh 3vw;
-    height: 8vh;
-    padding: 0;
-    animation: spin_icons 0.1s linear 0s infinite;
-    animation-play-state: running;
-}
-
-@keyframes spin_icons {
-    50% {
-        transform: rotate(180deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+    margin-top: auto;
 }
 
 .footer li {
-    margin: 0;
-    padding: 0;
-    height: 0;
-    width: 0;
-    display: inline;
+    margin: 0 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.footerImg {
+    height: 30px;
+    width: auto;
+    filter: grayscale(1);
+    opacity: 0.5;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.footerImg:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    animation: spin_icons 0.6s linear infinite;
+}
+
+@keyframes spin_icons {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
