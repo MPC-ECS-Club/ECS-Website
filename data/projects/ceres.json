@@ -1,0 +1,69 @@
+{
+  "contributors": [
+    {
+      "referenceTag": "sebastianRuedaVillamil",
+      "role": "Lead Software Developer"
+    },
+    {
+      "referenceTag": "jordiNieves",
+      "role": "Project Manager"
+    },
+    {
+      "referenceTag": "jasonLam",
+      "role": "Software Developer"
+    },
+    {
+      "referenceTag": "jdSolano",
+      "role": "Project Research and Developer"
+    },
+    {
+      "referenceTag": "paoloMorales",
+      "role": "Project Research and Part Design"
+    },
+    {
+      "referenceTag": "jeanLucMadrid",
+      "role": "Project Logistics"
+    }
+  ],
+  "posts": [
+    {
+      "title": "Camera and Sensor Calibration",
+      "date": "January 2026 - Present",
+      "contributors": [
+        "jordiNieves",
+        "sebastianRuedaVillamil"
+      ],
+      "description": "Researching and calibrating the camera and sensors for the drone. Research involved looking into datasets for detecting strawberries and raspberries, as well as identifying plant health. This research is ongoing and we have made considerations to develop our own dataset in the future.",
+      "images": []
+    },
+    {
+      "title": "Initial Drone Assembly",
+      "date": "January 2026",
+      "contributors": [
+        "jordiNieves",
+        "paoloMorales",
+        "jdSolano",
+        "jasonLam"
+      ],
+      "description": "We started putting together the frame. The carbon fiber structure is incredibly sturdy and lightweight. Parts still have to arrive, and much more progress has been made outside of the drone's frame.",
+      "images": [
+        {
+          "src": "images/drone/drone.webp",
+          "alt": "Partially constructed drone frame"
+        }
+      ]
+    },
+    {
+      "title": "Project Planning",
+      "date": "November 2025 - December 2025",
+      "contributors": [
+        "jordiNieves",
+        "jasonLam",
+        "paoloMorales",
+        "jdSolano",
+        "jeanLucMadrid"
+      ],
+      "description": "Deep research and planning period for the drone project. Looked into drone parts, existing solutions, what we could do better, and our end goals. We made a comprehensive list of everything we needed and set a plan to get there. Spoke with JAL Berry Farms to understand their needs and concerns and how we could help them."
+    }
+  ]
+}

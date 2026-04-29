@@ -58,6 +58,11 @@ function navigate(page, caller) {
                     loadMembers();
                 }
 
+                // If we navigated to projects.html, load the projects data
+                if (page === "projects.html" && typeof loadProjects === "function") {
+                    loadProjects();
+                }
+
                 //includeHTML(null, document.getElementById("content"));
             }
             if (this.status == 404) { document.getElementById("content").innerHTML = "Page not found."; }

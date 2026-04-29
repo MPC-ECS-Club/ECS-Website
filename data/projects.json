@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Crop Evaluation & Recognition Embedded System (C.E.R.E.S.)",
+    "moreInfo": "ceres.json",
+    "images": [
+      {
+        "src": "images/drone/drone.webp",
+        "alt": "Partially constructed drone"
+      }
+    ],
+    "description": "In collaboration with JAL Berry Farms, <i>C.E.R.E.S.</i> is a computer-vision based agricultural drone. Using <b>depth-analysis</b> and <b>machine learning</b>, <i>C.E.R.E.S.</i> will be able to detect <b>harvestable berries</b>, <b>topological data</b>, and <b>soil moisture</b> when completed. <i>C.E.R.E.S.</i> is a promising technological endeavor to offer a cost-effective solution to farming.<br><br>"
+  },
+  {
+    "title": "The Happy Caterpillar",
+    "images": [
+      {
+        "src": "images/happy-caterpillar.webp",
+        "alt": "Student playing with Happy Caterpiller game at the MPC STEAM exhibit."
+      },
+      {
+        "src": "images/happy-caterpillar-2.webp",
+        "alt": "Players surrounding a game of Happy Caterpillar."
+      }
+    ],
+    "description": "<i>Happy Caterpillar</i> was our exhibit for the STEAM competition and STEM Family Day. The game is a recreation of the game <i>Snake</i> running on an Arduino microcontroller and displayed on a strip of NeoPixel LEDs. The cabinet was designed and painted in-house. To create the defined blocky look, a custom grid was 3D-printed and laid on top of the LED strips. For our efforts, we were voted as the favorite exhibit of the show and helped invigorate many people's enthusiasm for STEM.<br><br>"
+  }
+]
