@@ -97,12 +97,15 @@ p {
 
 .exImg {
     align-self: center;
-    height: 50vh;
+    max-height: 50vh;
+    width: auto;
+    height: auto;
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 2vh;
     border: 3px inset var(--mpc-red);
     max-width: 100%;
+    object-fit: contain;
 }
 
 .calendar {
@@ -285,6 +288,8 @@ p {
 .modal-blog-post-title-group {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .modal-blog-post-header h4 {
@@ -512,4 +517,25 @@ p {
     font-style: italic;
     color: var(--text-muted);
     font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+    .modal-blog-post-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .modal-blog-post-date {
+        margin-left: 0;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+    
+    .modal-tabs {
+        flex-wrap: wrap;
+    }
 }
