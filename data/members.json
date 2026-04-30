@@ -62,8 +62,7 @@
     "major": "Mechanical Engineering",
     "image": "images/people/paolo.webp",
     "alt": "Club Representative Photo",
-    "type": "officer",
-    "hoverMessage": "tippy toe"
+    "type": "officer"
   },
   {
     "referenceTag": "perlaGonzalez",
