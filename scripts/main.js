@@ -38,3 +38,22 @@ function setupThemeToggle() {
         }
     });
 }
+
+function setupDroneToggle() {
+    const toggleButton = document.getElementById('drone-toggle');
+    if (!toggleButton) return;
+
+    // Check saved state (default true if not set)
+    const savedState = localStorage.getItem('dronesEnabled');
+    window.dronesEnabled = savedState !== 'false';
+    
+    // Set initial styling/icon opacity
+    toggleButton.style.opacity = window.dronesEnabled ? '1' : '0.4';
+
+    toggleButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.dronesEnabled = !window.dronesEnabled;
+        localStorage.setItem('dronesEnabled', window.dronesEnabled);
+        toggleButton.style.opacity = window.dronesEnabled ? '1' : '0.4';
+    });
+}

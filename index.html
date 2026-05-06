@@ -51,6 +51,10 @@
             if (typeof setupThemeToggle === "function") {
                 setupThemeToggle();
             }
+            // Initialize drone toggle logic
+            if (typeof setupDroneToggle === "function") {
+                setupDroneToggle();
+            }
 
             // Look for the navbar items and assign active page
             const currentHash = window.location.hash || "#home";
