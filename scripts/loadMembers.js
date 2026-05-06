@@ -6,7 +6,8 @@ async function loadMembers() {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const members = await response.json();
+        const allMembers = await response.json();
+        const members = allMembers.filter(person => !person.retired);
 
         const container = document.getElementById('tree-container');
         if (!container) return; // Exit if container is not found
@@ -105,11 +106,12 @@ async function loadMembers() {
 
 async function loadRetiredMembers() {
     try {
-        const response = await fetch('data/retired.json');
+        const response = await fetch('data/members.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const retiredMembers = await response.json();
+        const allMembers = await response.json();
+        const retiredMembers = allMembers.filter(person => person.retired);
 
         const container = document.getElementById('tree-container');
         if (!container) return;
