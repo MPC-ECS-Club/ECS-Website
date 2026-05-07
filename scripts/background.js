@@ -60,7 +60,7 @@ class Drone {
             if (other === this) continue;
             let dx = this.x - other.x;
             let dy = this.y - other.y;
-            let d = Math.sqrt(dx*dx + dy*dy);
+            let d = Math.sqrt(dx * dx + dy * dy);
 
             if (d < sepDist) {
                 // Separation
@@ -85,15 +85,15 @@ class Drone {
         }
 
         const steer = (tx, ty, isVelocity = false) => {
-            let mag = Math.sqrt(tx*tx + ty*ty);
-            if (mag === 0) return {x:0, y:0};
+            let mag = Math.sqrt(tx * tx + ty * ty);
+            if (mag === 0) return { x: 0, y: 0 };
             if (isVelocity) {
                 tx = (tx / mag) * this.maxSpeed;
                 ty = (ty / mag) * this.maxSpeed;
             } else {
                 let dx = tx - this.x;
                 let dy = ty - this.y;
-                let dMag = Math.sqrt(dx*dx + dy*dy);
+                let dMag = Math.sqrt(dx * dx + dy * dy);
                 if (dMag > 0) {
                     tx = (dx / dMag) * this.maxSpeed;
                     ty = (dy / dMag) * this.maxSpeed;
@@ -103,25 +103,25 @@ class Drone {
             }
             let steerX = tx - this.vx;
             let steerY = ty - this.vy;
-            let sMag = Math.sqrt(steerX*steerX + steerY*steerY);
+            let sMag = Math.sqrt(steerX * steerX + steerY * steerY);
             if (sMag > this.maxForce) {
                 steerX = (steerX / sMag) * this.maxForce;
                 steerY = (steerY / sMag) * this.maxForce;
             }
-            return {x: steerX, y: steerY};
+            return { x: steerX, y: steerY };
         };
 
         if (sepCount > 0) {
             sepX /= sepCount;
             sepY /= sepCount;
-            let smag = Math.sqrt(sepX*sepX + sepY*sepY);
+            let smag = Math.sqrt(sepX * sepX + sepY * sepY);
             if (smag > 0) {
                 sepX = (sepX / smag) * this.maxSpeed;
                 sepY = (sepY / smag) * this.maxSpeed;
             }
             let sForceX = sepX - this.vx;
             let sForceY = sepY - this.vy;
-            let smagf = Math.sqrt(sForceX*sForceX + sForceY*sForceY);
+            let smagf = Math.sqrt(sForceX * sForceX + sForceY * sForceY);
             if (smagf > this.maxForce) {
                 sForceX = (sForceX / smagf) * this.maxForce;
                 sForceY = (sForceY / smagf) * this.maxForce;
@@ -151,7 +151,7 @@ class Drone {
             } else if (this.type === 'avoider') {
                 let dx = this.x - mouseX;
                 let dy = this.y - mouseY;
-                let dist = Math.sqrt(dx*dx + dy*dy);
+                let dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < 250) {
                     // Flee from mouse if too close
                     this.applyForce(-mForce.x * 1.5, -mForce.y * 1.5);
@@ -159,7 +159,7 @@ class Drone {
             }
         } else {
             if (this.type === 'follower') {
-                let mForce = steer(width/2, height/2, false);
+                let mForce = steer(width / 2, height / 2, false);
                 this.applyForce(mForce.x * 0.05, mForce.y * 0.05); // Gentler pull to center when idle
             }
         }
@@ -168,16 +168,16 @@ class Drone {
     update() {
         this.vx += this.ax;
         this.vy += this.ay;
-        
-        let speed = Math.sqrt(this.vx*this.vx + this.vy*this.vy);
+
+        let speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
         if (speed > this.maxSpeed) {
             this.vx = (this.vx / speed) * this.maxSpeed;
             this.vy = (this.vy / speed) * this.maxSpeed;
         }
-        
+
         this.x += this.vx;
         this.y += this.vy;
-        
+
         this.ax = 0;
         this.ay = 0;
 
@@ -207,16 +207,16 @@ class Drone {
 
         // X chassis
         ctx.beginPath();
-        ctx.moveTo(-this.size/2, -this.size/2);
-        ctx.lineTo(this.size/2, this.size/2);
-        ctx.moveTo(this.size/2, -this.size/2);
-        ctx.lineTo(-this.size/2, this.size/2);
+        ctx.moveTo(-this.size / 2, -this.size / 2);
+        ctx.lineTo(this.size / 2, this.size / 2);
+        ctx.moveTo(this.size / 2, -this.size / 2);
+        ctx.lineTo(-this.size / 2, this.size / 2);
         ctx.stroke();
 
         // Center hub
         ctx.fillStyle = mainColor;
         ctx.beginPath();
-        ctx.arc(0, 0, this.size/4, 0, Math.PI * 2);
+        ctx.arc(0, 0, this.size / 4, 0, Math.PI * 2);
         ctx.fill();
 
         // Propellers
@@ -227,28 +227,28 @@ class Drone {
             ctx.strokeStyle = propColor;
             ctx.lineWidth = 1;
             ctx.beginPath();
-            ctx.arc(0, 0, this.size/2.5, 0, Math.PI * 2);
+            ctx.arc(0, 0, this.size / 2.5, 0, Math.PI * 2);
             ctx.stroke();
             // Lines inside prop for spin effect
             ctx.beginPath();
-            ctx.moveTo(-this.size/2.5, 0);
-            ctx.lineTo(this.size/2.5, 0);
-            ctx.moveTo(0, -this.size/2.5);
-            ctx.lineTo(0, this.size/2.5);
+            ctx.moveTo(-this.size / 2.5, 0);
+            ctx.lineTo(this.size / 2.5, 0);
+            ctx.moveTo(0, -this.size / 2.5);
+            ctx.lineTo(0, this.size / 2.5);
             ctx.stroke();
             ctx.restore();
         };
 
-        drawProp(-this.size/2, -this.size/2);
-        drawProp(this.size/2, -this.size/2);
-        drawProp(-this.size/2, this.size/2);
-        drawProp(this.size/2, this.size/2);
+        drawProp(-this.size / 2, -this.size / 2);
+        drawProp(this.size / 2, -this.size / 2);
+        drawProp(-this.size / 2, this.size / 2);
+        drawProp(this.size / 2, this.size / 2);
 
         ctx.restore();
     }
 }
 
-const numDrones = 35; // increased to accommodate both
+const numDrones = 15; // increased to accommodate both
 const drones = [];
 
 function init() {
@@ -270,9 +270,9 @@ window.addEventListener('resize', init);
 
 function animate() {
     ctx.clearRect(0, 0, width, height);
-    
+
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    
+
     // Update spotlight positions
     spotlights.forEach(s => {
         s.x += s.vx;
@@ -287,11 +287,11 @@ function animate() {
         for (let c = 0; c < cols; c++) {
             const x = c * spacing;
             const y = r * spacing;
-            
+
             const drawConnection = (x1, y1, x2, y2) => {
                 const midX = (x1 + x2) / 2;
                 const midY = (y1 + y2) / 2;
-                
+
                 let maxIllumination = 0;
                 spotlights.forEach(s => {
                     const dx = midX - s.x;
@@ -303,14 +303,14 @@ function animate() {
                         if (illumination > maxIllumination) maxIllumination = illumination;
                     }
                 });
-                
+
                 const baseAlpha = isDark ? 0.03 : 0.04;
                 const alpha = baseAlpha + (maxIllumination * 0.05);
-                
+
                 ctx.beginPath();
                 ctx.strokeStyle = isDark ? `rgba(226, 232, 240, ${alpha})` : `rgba(155, 17, 58, ${alpha})`;
                 ctx.lineWidth = 1;
-                
+
                 ctx.moveTo(x1, y1);
                 ctx.lineTo(x2, y2);
                 ctx.stroke();
