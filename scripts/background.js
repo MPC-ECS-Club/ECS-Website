@@ -25,6 +25,7 @@ const spotlights = [
     { x: 300, y: 500, vx: -0.6, vy: 0.4, radius: 600 },
     { x: 800, y: 200, vx: 0.4, vy: -0.5, radius: 550 }
 ];
+let lastTime = 0;
 
 // --- DRONE BOIDS CLASS ---
 class Drone {
@@ -165,9 +166,9 @@ class Drone {
         }
     }
 
-    update() {
-        this.vx += this.ax;
-        this.vy += this.ay;
+    update(dt) {
+        this.vx += this.ax * dt;
+        this.vy += this.ay * dt;
 
         let speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
         if (speed > this.maxSpeed) {
@@ -175,13 +176,13 @@ class Drone {
             this.vy = (this.vy / speed) * this.maxSpeed;
         }
 
-        this.x += this.vx;
-        this.y += this.vy;
+        this.x += this.vx * dt;
+        this.y += this.vy * dt;
 
         this.ax = 0;
         this.ay = 0;
 
-        this.propAngle += speed * 0.15 + 0.1;
+        this.propAngle += (speed * 0.15 + 0.1) * dt;
 
         if (this.x < -this.size * 2) this.x = width + this.size * 2;
         if (this.x > width + this.size * 2) this.x = -this.size * 2;
@@ -268,15 +269,23 @@ function init() {
 
 window.addEventListener('resize', init);
 
-function animate() {
+function animate(currentTime) {
+    if (!lastTime) {
+        lastTime = currentTime;
+        requestAnimationFrame(animate);
+        return;
+    }
+    const dt = (currentTime - lastTime) / (1000 / 60); // Delta time normalized to 60fps
+    lastTime = currentTime;
+
     ctx.clearRect(0, 0, width, height);
 
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
 
     // Update spotlight positions
     spotlights.forEach(s => {
-        s.x += s.vx;
-        s.y += s.vy;
+        s.x += s.vx * dt;
+        s.y += s.vy * dt;
 
         if (s.x < -s.radius / 2 || s.x > width + s.radius / 2) s.vx *= -1;
         if (s.y < -s.radius / 2 || s.y > height + s.radius / 2) s.vy *= -1;
@@ -325,7 +334,7 @@ function animate() {
     if (window.dronesEnabled !== false) {
         drones.forEach(drone => {
             drone.flock(drones);
-            drone.update();
+            drone.update(dt);
             drone.draw(ctx, isDark);
         });
     }
