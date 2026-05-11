@@ -15,6 +15,7 @@
     --border-color: #eaeaea;
     --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
     --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.1);
+    --icon-invert: invert(1);
 }
 
 [data-theme="dark"] {
@@ -32,6 +33,7 @@
     --border-color: #2a2e37;
     --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.3);
     --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.5);
+    --icon-invert: invert(0);
 }
 
 * {
