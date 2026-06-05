@@ -48,9 +48,9 @@ class Drone {
     }
 
     flock(drones) {
-        let sepDist = 50;
-        let aliDist = 100;
-        let cohDist = 100;
+        const sepDist = 50;
+        const aliDist = 100;
+        const cohDist = 100;
 
         let sepX = 0, sepY = 0, sepCount = 0;
         let aliX = 0, aliY = 0, aliCount = 0;
@@ -112,21 +112,8 @@ class Drone {
         };
 
         if (sepCount > 0) {
-            sepX /= sepCount;
-            sepY /= sepCount;
-            let smag = Math.sqrt(sepX * sepX + sepY * sepY);
-            if (smag > 0) {
-                sepX = (sepX / smag) * this.maxSpeed;
-                sepY = (sepY / smag) * this.maxSpeed;
-            }
-            let sForceX = sepX - this.vx;
-            let sForceY = sepY - this.vy;
-            let smagf = Math.sqrt(sForceX * sForceX + sForceY * sForceY);
-            if (smagf > this.maxForce) {
-                sForceX = (sForceX / smagf) * this.maxForce;
-                sForceY = (sForceY / smagf) * this.maxForce;
-            }
-            this.applyForce(sForceX * 1.8, sForceY * 1.8);
+            const sForce = steer(sepX / sepCount, sepY / sepCount, true);
+            this.applyForce(sForce.x * 1.8, sForce.y * 1.8);
         }
 
         if (aliCount > 0) {

@@ -19,9 +19,10 @@ const routes = {
 }
 
 const locationHandler = async () => {
-    var location = window.location.hash.replace("#","");
+    const location = window.location.hash.replace("#","");
     if (location.length === 0) {
-        location = "home";
+        navigate(routes.home.template);
+        return;
     }
     const route = routes[location];
     if (!route) {
@@ -32,53 +33,38 @@ const locationHandler = async () => {
     navigate(route.template);
 }
 
-//navigates to a page by changing updating "content" to the page's contents
-function navigate(page, caller) {
-    page = page;// || page.template;
-    
-    //*for debugging
-    const checkPage = page || page.template; 
-    console.log("Current page: ",checkPage);
-    //*/
-    xhttp = new XMLHttpRequest();
+//navigates to a page by updating "content" to the page's contents
+function navigate(page) {
+    const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
-        //4 idicates a success
         if (this.readyState == 4) {
-            if (this.status == 200) { 
+            if (this.status == 200) {
                 document.getElementById("content").innerHTML = this.responseText;
                 hydrateLinks(document.getElementById("content"));
 
-                // If we navigated to members.html, load the members data
                 if (page === "members.html" && typeof loadMembers === "function") {
                     loadMembers();
                 }
-
-                // If we navigated to projects.html, load the projects data
                 if (page === "projects.html" && typeof loadProjects === "function") {
                     loadProjects();
                 }
-
-                // If we navigated to home.html, load meeting times
                 if (page === "home.html" && typeof loadMeetingTimes === "function") {
                     loadMeetingTimes();
                 }
-
-                //includeHTML(null, document.getElementById("content"));
             }
             if (this.status == 404) { document.getElementById("content").innerHTML = "Page not found."; }
         }
     }
     xhttp.open("GET", page, true);
     xhttp.send();
-    const previousLink = document.getElementsByClassName("active");
-    console.log(previousLink);
+
+    const previousActive = document.getElementsByClassName("active");
     const currentHash = window.location.hash || "#home";
     const activeLink = document.querySelector(`.navbar-item[href="${currentHash}"]`);
-    if (previousLink.length > 0) {
-        previousLink[0].classList.remove('active');
+    if (previousActive.length > 0) {
+        previousActive[0].classList.remove('active');
     }
     if (activeLink) {
         activeLink.classList.add('active');
     }
-    console.log("Current hash: ",activeLink);
 }

@@ -48,26 +48,20 @@
     <script type="text/javascript" src="scripts/main.js" defer></script>
     <script>
         includeHTML(function () {
-            console.log("All HTML (header/footer) loaded!");
             hydrateLinks();
 
-            // Initialize theme toggle logic
             if (typeof setupThemeToggle === "function") {
                 setupThemeToggle();
             }
-            // Initialize drone toggle logic
             if (typeof setupDroneToggle === "function") {
                 setupDroneToggle();
             }
 
-            // Look for the navbar items and assign active page
             const currentHash = window.location.hash || "#home";
             const activeLink = document.querySelector(`.navbar-item[href="${currentHash}"]`);
-
             if (activeLink) {
                 activeLink.classList.add('active');
             }
-            console.log("Current hash: ", activeLink);
         });
     </script>
 </body>
