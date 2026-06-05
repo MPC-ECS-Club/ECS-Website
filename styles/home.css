@@ -77,6 +77,24 @@
     margin-bottom: 1rem;
 }
 
+.meeting-footnote {
+    margin: 1rem 0 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.meeting-semester {
+    display: inline-block;
+    margin: -0.25rem 0 1rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    background-color: var(--border-color);
+    border-radius: 6px;
+}
+
 .meeting-list {
     list-style-type: none;
     padding: 0;

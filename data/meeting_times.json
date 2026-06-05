@@ -1,0 +1,9 @@
+{
+  "semester": "Spring 2026 (No meetings in Summer scheduled)",
+  "times": [
+    { "day": "Monday",    "time": "12:00pm - 2:00pm", "location": "BMC 205" },
+    { "day": "Wednesday", "time": "12:00pm - 2:00pm", "location": "BMC 205" },
+    { "day": "Friday",    "time": "12:00pm - 2:00pm", "location": "BMC 205" },
+    { "day": "Saturday",  "time": "12:00pm - 2:00pm", "location": "MPC's STEM Center (Library)" }
+  ]
+}

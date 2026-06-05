@@ -1,11 +1,6 @@
 //uses # to do navigation
 const routes = {
     //update this when adding another page
-    404: {
-        template: "404.html",
-        title: "404",
-        description: "Page not found"
-    },
     home: {
         template: "home.html",
         title: "E/CS | Home",
@@ -21,20 +16,19 @@ const routes = {
         title: "E/CS | Club Members",
         description: "Meet our team!"
     },
-    calendar: {
-        template: "calendar.html",
-        title: "E/CS | Club Calendar",
-        description: ""
-    }
-    
 }
 
 const locationHandler = async () => {
     var location = window.location.hash.replace("#","");
     if (location.length === 0) {
-        location ="home";
+        location = "home";
     }
-    const route = routes[location] || routes[404];
+    const route = routes[location];
+    if (!route) {
+        document.getElementById("content").innerHTML =
+            '<div class="content"><h1 class="errorMsg">Page Not Found</h1><p class="errorTip">Use the navigation bar at the top to return to a valid webpage.</p></div>';
+        return;
+    }
     navigate(route.template);
 }
 
@@ -51,8 +45,9 @@ function navigate(page, caller) {
         //4 idicates a success
         if (this.readyState == 4) {
             if (this.status == 200) { 
-                document.getElementById("content").innerHTML = this.responseText; 
-                
+                document.getElementById("content").innerHTML = this.responseText;
+                hydrateLinks(document.getElementById("content"));
+
                 // If we navigated to members.html, load the members data
                 if (page === "members.html" && typeof loadMembers === "function") {
                     loadMembers();
@@ -61,6 +56,11 @@ function navigate(page, caller) {
                 // If we navigated to projects.html, load the projects data
                 if (page === "projects.html" && typeof loadProjects === "function") {
                     loadProjects();
+                }
+
+                // If we navigated to home.html, load meeting times
+                if (page === "home.html" && typeof loadMeetingTimes === "function") {
+                    loadMeetingTimes();
                 }
 
                 //includeHTML(null, document.getElementById("content"));
