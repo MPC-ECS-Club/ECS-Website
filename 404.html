@@ -4,21 +4,42 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Apply saved theme before first paint to avoid flashing the wrong theme -->
+    <script>
+        if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.setAttribute("data-theme", "dark");
+        }
+    </script>
+
+    <!-- Raleway font from Google-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
     <link rel="icon" href="images/favicon.ico">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <script type="text/javascript" src="scripts/config.js"></script>
     <script type="text/javascript" src="scripts/includeHTML.js"></script>
     <title>Page Not Found</title>
 </head>
 
 <body>
-    <div file-to-include="header.html"></div>
-    <div class="content">
-        <h1 class="errorMsg">Page Not Found</h1>
-        <p class="errorTip">Use the navigation bar at the top to return to a valid webpage.</p>
+    <div class="main-wrapper">
+        <header file-to-include="header.html"></header>
+        <div class="content">
+            <h1 class="errorMsg">Page Not Found</h1>
+            <p class="errorTip">Use the navigation bar at the top to return to a valid webpage.</p>
+        </div>
+        <footer file-to-include="footer.html"></footer>
     </div>
-    <div file-to-include="footer.html"></div>
     <script>
-        includeHTML();
+        includeHTML(function () {
+            hydrateLinks();
+        });
     </script>
 
 </body>

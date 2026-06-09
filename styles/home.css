@@ -4,12 +4,12 @@
     text-align: center;
     padding: 4rem 1rem;
     margin-bottom: 3rem;
-    background: linear-gradient(135deg, rgba(155, 17, 58, 0.05) 0%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(135deg, rgba(155, 17, 58, 0.08) 0%, rgba(0, 0, 0, 0) 100%);
     border-radius: 20px;
 }
 
 [data-theme="dark"] .hero {
-    background: linear-gradient(135deg, rgba(155, 17, 58, 0.15) 0%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(135deg, rgba(155, 17, 58, 0.25) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 .hero-title {
@@ -44,9 +44,9 @@
 }
 
 .btn-outline:hover {
-    background-color: rgba(155, 17, 58, 0.1);
-    color: var(--mpc-red) !important;
-    box-shadow: none;
+    background-color: var(--mpc-red);
+    color: white !important;
+    box-shadow: 0 8px 25px rgba(155, 17, 58, 0.4);
     transform: translateY(-2px);
 }
 
@@ -77,6 +77,24 @@
     margin-bottom: 1rem;
 }
 
+.meeting-footnote {
+    margin: 1rem 0 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.meeting-semester {
+    display: inline-block;
+    margin: -0.25rem 0 1rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    background-color: var(--border-color);
+    border-radius: 6px;
+}
+
 .meeting-list {
     list-style-type: none;
     padding: 0;
@@ -90,4 +108,111 @@
 
 .meeting-list li:last-child {
     border-bottom: none;
+}
+
+/* Contact Section */
+.contact-section {
+    margin-top: 4rem;
+    padding: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-container {
+    position: relative;
+    padding: 4rem 3rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    overflow: hidden; /* This provides the clipping */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: min(100%, 800px);
+    box-shadow: var(--shadow-soft);
+}
+
+.contact-bg-square {
+    position: absolute;
+    top: 50%;
+    left: -150px; /* Start outside the container */
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--mpc-red), rgba(155, 17, 58, 0.2));
+    border-radius: 12px;
+    z-index: 0;
+    opacity: 0.2;
+    filter: blur(20px); /* Abstract feel */
+    animation: scan-square 6s infinite ease-in-out;
+}
+
+[data-theme="dark"] .contact-bg-square {
+    opacity: 0.3;
+}
+
+.contact-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.contact-text {
+    font-size: clamp(1.2rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    margin: 0;
+    color: var(--text-color);
+    letter-spacing: -0.5px;
+}
+
+.contact-text a {
+    color: var(--mpc-red);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.contact-text a:hover {
+    color: var(--mpc-red);
+    text-decoration: underline;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Add glow for readability against moving square */
+}
+
+@keyframes scan-square {
+    0% {
+        left: -150px;
+        width: 100px;
+        height: 100px;
+        transform: translateY(-50%) rotate(0deg);
+    }
+    25% {
+        width: 150px;
+        height: 80px;
+    }
+    50% {
+        left: 50%;
+        width: 120px;
+        height: 120px;
+        transform: translate(-50%, -50%) rotate(180deg);
+    }
+    75% {
+        width: 80px;
+        height: 150px;
+    }
+    100% {
+        left: calc(100% + 150px);
+        width: 100px;
+        height: 100px;
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+@media (max-width: 600px) {
+    .contact-container {
+        padding: 3rem 1.5rem;
+    }
+    
+    .contact-text {
+        font-size: 1.2rem;
+    }
 }

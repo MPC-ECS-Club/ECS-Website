@@ -13,7 +13,12 @@
     <!-- TODO: Change/add meta tag for official club account metatag -->
     <meta name="google-site-verification" content="gP35IFXNNPw-UDud5nbMGpntPl9vTVAqbdiUDQSHb-U" />
 
-    <!-- <meta http-equiv="refresh" content="0; url='index.html'"> -->
+    <!-- Apply saved theme before first paint to avoid flashing the wrong theme -->
+    <script>
+        if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.setAttribute("data-theme", "dark");
+        }
+    </script>
 
     <!-- Raleway font from Google-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,6 +30,7 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/home.css">
     <link rel="stylesheet" href="styles/officers.css">
 
     <title>E/CS Club</title>
@@ -37,33 +43,20 @@
         <div id="content" class="content"></div>
         <footer file-to-include="footer.html"></footer>
     </div>
+    <script type="text/javascript" src="scripts/config.js"></script>
     <script type="text/javascript" src="scripts/includeHTML.js"></script>
     <script type="text/javascript" src="scripts/hashRouter.js"></script>
     <script type="text/javascript" src="scripts/loadMembers.js"></script>
     <script type="text/javascript" src="scripts/loadProjects.js"></script>
+    <script type="text/javascript" src="scripts/loadMeetingTimes.js"></script>
     <script type="text/javascript" src="scripts/background.js"></script>
-    <script type="text/javascript" src="scripts/main.js" defer></script>
+    <script type="text/javascript" src="scripts/main.js"></script>
     <script>
         includeHTML(function () {
-            console.log("All HTML (header/footer) loaded!");
-
-            // Initialize theme toggle logic
-            if (typeof setupThemeToggle === "function") {
-                setupThemeToggle();
-            }
-            // Initialize drone toggle logic
-            if (typeof setupDroneToggle === "function") {
-                setupDroneToggle();
-            }
-
-            // Look for the navbar items and assign active page
-            const currentHash = window.location.hash || "#home";
-            const activeLink = document.querySelector(`.navbar-item[href="${currentHash}"]`);
-
-            if (activeLink) {
-                activeLink.classList.add('active');
-            }
-            console.log("Current hash: ", activeLink);
+            hydrateLinks();
+            setupThemeToggle();
+            setupDroneToggle();
+            updateActiveLink();
         });
     </script>
 </body>

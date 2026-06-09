@@ -173,8 +173,16 @@
 }
 
 .members {
-    padding-top: 15;
+    padding-top: 15px;
     /* smaller gap from the header */
+}
+
+#toggle-past-members {
+    margin: 20px auto;
+    display: block;
+    width: 200px;
+    cursor: pointer;
+    border-radius: 8px;
 }
 
 .members h2 {

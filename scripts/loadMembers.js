@@ -1,21 +1,68 @@
 let showingRetired = false;
+let cachedAllMembers = null;
+
+//shared members cache; also used by loadProjects.js to resolve referenceTags
+async function getAllMembers() {
+    if (cachedAllMembers) return cachedAllMembers;
+    const response = await fetch('data/members.json');
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    cachedAllMembers = await response.json();
+    return cachedAllMembers;
+}
+
+function createMemberCard(person, { includeRedirect = false } = {}) {
+    const li = document.createElement('li');
+    li.className = person.type === 'officer' ? 'officer' : 'member';
+
+    const img = document.createElement('img');
+    img.src = person.image;
+    img.alt = person.alt || `${person.name} photo`;
+
+    const h3 = document.createElement('h3');
+    h3.className = person.type === 'officer' ? 'officer-name' : 'member-name';
+    h3.textContent = person.name;
+
+    const pRole = document.createElement('p');
+    pRole.className = person.type === 'officer' ? 'officer-position' : 'member-position';
+    pRole.textContent = person.role;
+
+    const pMajor = document.createElement('p');
+    pMajor.className = person.type === 'officer' ? 'officer-major' : 'member-major';
+    pMajor.textContent = person.major;
+
+    li.appendChild(img);
+    li.appendChild(h3);
+    li.appendChild(pRole);
+    li.appendChild(pMajor);
+
+    if (person.hoverMessage) {
+        const tooltip = document.createElement('div');
+        tooltip.className = 'member-tooltip';
+        tooltip.textContent = person.hoverMessage;
+        li.appendChild(tooltip);
+    }
+
+    if (includeRedirect && person.redirect) {
+        li.addEventListener('click', () => {
+            window.open(person.redirect, '_blank');
+        });
+    }
+
+    return li;
+}
 
 async function loadMembers() {
     try {
-        const response = await fetch('data/members.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const allMembers = await response.json();
+        const allMembers = await getAllMembers();
         const members = allMembers.filter(person => !person.retired);
 
         const container = document.getElementById('tree-container');
-        if (!container) return; // Exit if container is not found
+        if (!container) return;
 
-        // Clear existing content just in case
         container.innerHTML = '';
 
-        // Define the tiers
         const tiers = {
             level1: [], // President, Vice President
             level2: [], // Secretary, Treasurer
@@ -23,7 +70,6 @@ async function loadMembers() {
             level4: []  // Members
         };
 
-        // Group members
         members.forEach(person => {
             const role = person.role.toLowerCase();
             if (role === 'president' || role === 'vice president') {
@@ -37,61 +83,12 @@ async function loadMembers() {
             }
         });
 
-        // Function to create a list of cards for a tier
-        const createTierContainer = (tierMembers) => {
-            if (tierMembers.length === 0) return null;
+        Object.values(tiers).forEach(tierMembers => {
+            if (tierMembers.length === 0) return;
             const ul = document.createElement('ul');
             ul.className = 'tier';
-
-            tierMembers.forEach(person => {
-                const li = document.createElement('li');
-                li.className = person.type === 'officer' ? 'officer' : 'member';
-
-                const img = document.createElement('img');
-                img.src = person.image;
-                img.alt = person.alt || `${person.name} photo`;
-
-                const h3 = document.createElement('h3');
-                h3.className = person.type === 'officer' ? 'officer-name' : 'member-name';
-                h3.textContent = person.name;
-
-                const pRole = document.createElement('p');
-                pRole.className = person.type === 'officer' ? 'officer-position' : 'member-position';
-                pRole.textContent = person.role;
-
-                const pMajor = document.createElement('p');
-                pMajor.className = person.type === 'officer' ? 'officer-major' : 'member-major';
-                pMajor.textContent = person.major;
-
-                li.appendChild(img);
-                li.appendChild(h3);
-                li.appendChild(pRole);
-                li.appendChild(pMajor);
-
-                if (person.hoverMessage) {
-                    const tooltip = document.createElement('div');
-                    tooltip.className = 'member-tooltip';
-                    tooltip.textContent = person.hoverMessage;
-                    li.appendChild(tooltip);
-                }
-
-                if (person.redirect) {
-                    li.addEventListener('click', () => {
-                        window.open(person.redirect, '_blank');
-                    });
-                }
-
-                ul.appendChild(li);
-            });
-            return ul;
-        };
-
-        // Append tiers to the tree container
-        Object.keys(tiers).forEach(level => {
-            const ul = createTierContainer(tiers[level]);
-            if (ul) {
-                container.appendChild(ul);
-            }
+            tierMembers.forEach(person => ul.appendChild(createMemberCard(person, { includeRedirect: true })));
+            container.appendChild(ul);
         });
 
         setupToggleButton();
@@ -106,11 +103,7 @@ async function loadMembers() {
 
 async function loadRetiredMembers() {
     try {
-        const response = await fetch('data/members.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const allMembers = await response.json();
+        const allMembers = await getAllMembers();
         const retiredMembers = allMembers.filter(person => person.retired);
 
         const container = document.getElementById('tree-container');
@@ -124,46 +117,11 @@ async function loadRetiredMembers() {
         }
 
         const ul = document.createElement('ul');
-        ul.className = 'cards-list'; // Use the original flat flex grid style
+        ul.className = 'cards-list';
 
-        // Remove the 'tree' class temporarily so the vertical alignment and pseudo-elements from .tree don't mess up the flat grid
         container.classList.remove('tree');
 
-        retiredMembers.forEach(person => {
-            const li = document.createElement('li');
-            li.className = person.type === 'officer' ? 'officer' : 'member';
-
-            const img = document.createElement('img');
-            img.src = person.image;
-            img.alt = person.alt || `${person.name} photo`;
-
-            const h3 = document.createElement('h3');
-            h3.className = person.type === 'officer' ? 'officer-name' : 'member-name';
-            h3.textContent = person.name;
-
-            const pRole = document.createElement('p');
-            pRole.className = person.type === 'officer' ? 'officer-position' : 'member-position';
-            pRole.textContent = person.role;
-
-            const pMajor = document.createElement('p');
-            pMajor.className = person.type === 'officer' ? 'officer-major' : 'member-major';
-            pMajor.textContent = person.major;
-
-            li.appendChild(img);
-            li.appendChild(h3);
-            li.appendChild(pRole);
-            li.appendChild(pMajor);
-
-            if (person.hoverMessage) {
-                const tooltip = document.createElement('div');
-                tooltip.className = 'member-tooltip';
-                tooltip.textContent = person.hoverMessage;
-                li.appendChild(tooltip);
-            }
-
-            ul.appendChild(li);
-        });
-
+        retiredMembers.forEach(person => ul.appendChild(createMemberCard(person)));
         container.appendChild(ul);
 
     } catch (error) {
@@ -177,21 +135,18 @@ async function loadRetiredMembers() {
 
 function setupToggleButton() {
     const btn = document.getElementById('toggle-past-members');
-    if (!btn) return;
+    if (!btn || btn.dataset.listenerAttached) return;
+    btn.dataset.listenerAttached = 'true';
 
-    // Make sure we don't attach multiple listeners
-    const newBtn = btn.cloneNode(true);
-    btn.parentNode.replaceChild(newBtn, btn);
-
-    newBtn.addEventListener('click', () => {
+    btn.addEventListener('click', () => {
         showingRetired = !showingRetired;
         if (showingRetired) {
-            newBtn.textContent = 'Current Members';
+            btn.textContent = 'Current Members';
             loadRetiredMembers();
         } else {
-            newBtn.textContent = 'Past Members';
+            btn.textContent = 'Past Members';
             const container = document.getElementById('tree-container');
-            if (container) container.classList.add('tree'); // Restore tree class
+            if (container) container.classList.add('tree');
             loadMembers();
         }
     });
