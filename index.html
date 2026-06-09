@@ -13,7 +13,12 @@
     <!-- TODO: Change/add meta tag for official club account metatag -->
     <meta name="google-site-verification" content="gP35IFXNNPw-UDud5nbMGpntPl9vTVAqbdiUDQSHb-U" />
 
-    <!-- <meta http-equiv="refresh" content="0; url='index.html'"> -->
+    <!-- Apply saved theme before first paint to avoid flashing the wrong theme -->
+    <script>
+        if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.setAttribute("data-theme", "dark");
+        }
+    </script>
 
     <!-- Raleway font from Google-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,23 +50,13 @@
     <script type="text/javascript" src="scripts/loadProjects.js"></script>
     <script type="text/javascript" src="scripts/loadMeetingTimes.js"></script>
     <script type="text/javascript" src="scripts/background.js"></script>
-    <script type="text/javascript" src="scripts/main.js" defer></script>
+    <script type="text/javascript" src="scripts/main.js"></script>
     <script>
         includeHTML(function () {
             hydrateLinks();
-
-            if (typeof setupThemeToggle === "function") {
-                setupThemeToggle();
-            }
-            if (typeof setupDroneToggle === "function") {
-                setupDroneToggle();
-            }
-
-            const currentHash = window.location.hash || "#home";
-            const activeLink = document.querySelector(`.navbar-item[href="${currentHash}"]`);
-            if (activeLink) {
-                activeLink.classList.add('active');
-            }
+            setupThemeToggle();
+            setupDroneToggle();
+            updateActiveLink();
         });
     </script>
 </body>

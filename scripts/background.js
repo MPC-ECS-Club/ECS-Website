@@ -15,8 +15,12 @@ window.addEventListener('mousemove', (e) => {
     mouseY = e.clientY;
     isMouseActive = true;
 });
-window.addEventListener('mouseout', () => {
-    isMouseActive = false;
+window.addEventListener('mouseout', (e) => {
+    // relatedTarget is null only when the cursor leaves the window entirely;
+    // mouseout also fires when moving between elements, which we ignore
+    if (!e.relatedTarget) {
+        isMouseActive = false;
+    }
 });
 
 // Define autonomous spotlights

@@ -1,20 +1,12 @@
+// Note: the saved theme is applied by an inline script in <head> (before first
+// paint) to avoid a flash of the wrong theme.
 document.addEventListener("DOMContentLoaded", function() {
-    // Initialize theme right away to avoid flashing
-    initTheme();
-
-    //updates url when it changes 
+    //updates url when it changes
     window.addEventListener("hashchange", locationHandler);
-    
+
     //runs once on load
     locationHandler();
 });
-
-function initTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-    }
-}
 
 function setupThemeToggle() {
     const toggleButton = document.getElementById('theme-toggle');

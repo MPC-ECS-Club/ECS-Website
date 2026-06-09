@@ -1,6 +1,7 @@
 let showingRetired = false;
 let cachedAllMembers = null;
 
+//shared members cache; also used by loadProjects.js to resolve referenceTags
 async function getAllMembers() {
     if (cachedAllMembers) return cachedAllMembers;
     const response = await fetch('data/members.json');

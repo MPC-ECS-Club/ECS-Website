@@ -4,67 +4,68 @@ const routes = {
     home: {
         template: "home.html",
         title: "E/CS | Home",
-        description: "Welcome to the ECS Club homepage!"
+        description: "Welcome to the ECS Club homepage!",
+        onLoad: () => loadMeetingTimes()
     },
     projects: {
         template: "projects.html",
         title: "E/CS | Projects",
-        description: ""
+        description: "Explore the projects of the ECS Club.",
+        onLoad: () => loadProjects()
     },
     members: {
         template: "members.html",
         title: "E/CS | Club Members",
-        description: "Meet our team!"
+        description: "Meet our team!",
+        onLoad: () => loadMembers()
     },
 }
 
+const NOT_FOUND_HTML =
+    '<h1 class="errorMsg">Page Not Found</h1><p class="errorTip">Use the navigation bar at the top to return to a valid webpage.</p>';
+
+//renders the page matching the current hash into "content"
 const locationHandler = async () => {
-    const location = window.location.hash.replace("#","");
-    if (location.length === 0) {
-        navigate(routes.home.template);
-        return;
-    }
+    const location = window.location.hash.replace("#", "") || "home";
+    const content = document.getElementById("content");
     const route = routes[location];
+
+    updateActiveLink();
+
     if (!route) {
-        document.getElementById("content").innerHTML =
-            '<div class="content"><h1 class="errorMsg">Page Not Found</h1><p class="errorTip">Use the navigation bar at the top to return to a valid webpage.</p></div>';
+        content.innerHTML = NOT_FOUND_HTML;
+        document.title = "E/CS | Page Not Found";
         return;
     }
-    navigate(route.template);
+
+    try {
+        const response = await fetch(route.template);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        content.innerHTML = await response.text();
+    } catch (error) {
+        console.error(`Failed to load ${route.template}:`, error);
+        content.innerHTML = NOT_FOUND_HTML;
+        return;
+    }
+
+    document.title = route.title;
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription && route.description) {
+        metaDescription.setAttribute("content", route.description);
+    }
+
+    hydrateLinks(content);
+    route.onLoad();
 }
 
-//navigates to a page by updating "content" to the page's contents
-function navigate(page) {
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4) {
-            if (this.status == 200) {
-                document.getElementById("content").innerHTML = this.responseText;
-                hydrateLinks(document.getElementById("content"));
-
-                if (page === "members.html" && typeof loadMembers === "function") {
-                    loadMembers();
-                }
-                if (page === "projects.html" && typeof loadProjects === "function") {
-                    loadProjects();
-                }
-                if (page === "home.html" && typeof loadMeetingTimes === "function") {
-                    loadMeetingTimes();
-                }
-            }
-            if (this.status == 404) { document.getElementById("content").innerHTML = "Page not found."; }
-        }
-    }
-    xhttp.open("GET", page, true);
-    xhttp.send();
-
-    const previousActive = document.getElementsByClassName("active");
+//highlights the navbar link matching the current hash
+function updateActiveLink() {
     const currentHash = window.location.hash || "#home";
+    document.querySelectorAll(".navbar-item.active").forEach(el => el.classList.remove("active"));
     const activeLink = document.querySelector(`.navbar-item[href="${currentHash}"]`);
-    if (previousActive.length > 0) {
-        previousActive[0].classList.remove('active');
-    }
     if (activeLink) {
-        activeLink.classList.add('active');
+        activeLink.classList.add("active");
     }
 }

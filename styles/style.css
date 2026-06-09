@@ -81,12 +81,6 @@ p {
     color: var(--text-muted);
 }
 
-/* .content li {
-    margin: 0;
-    padding: 0;
-    display: inline;
-} */
-
 .projectDisplay {
     display: grid;
     text-align: center;

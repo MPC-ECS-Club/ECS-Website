@@ -1,19 +1,3 @@
-let cachedMembersData = null;
-
-async function getMembersData() {
-    if (cachedMembersData) return cachedMembersData;
-    try {
-        const response = await fetch('data/members.json');
-        if (response.ok) {
-            cachedMembersData = await response.json();
-            return cachedMembersData;
-        }
-    } catch (e) {
-        console.error("Could not load members data", e);
-    }
-    return null;
-}
-
 function resolveContributor(ref, members) {
     const tag = typeof ref === 'string' ? ref : ref.referenceTag;
     const member = members ? members.find(m => m.referenceTag === tag) : null;
@@ -45,6 +29,14 @@ async function loadProjects() {
             h3.textContent = project.title;
             li.appendChild(h3);
 
+            const createSeeMoreButton = (className) => {
+                const btn = document.createElement('button');
+                btn.className = className;
+                btn.textContent = 'See More';
+                btn.onclick = () => openProjectModal(project.moreInfo);
+                return btn;
+            };
+
             if (project.images && project.images.length > 0) {
                 project.images.forEach((imgData, index) => {
                     const imgContainer = document.createElement('div');
@@ -59,21 +51,13 @@ async function loadProjects() {
                     imgContainer.appendChild(img);
 
                     if (index === 0 && project.moreInfo) {
-                        const btn = document.createElement('button');
-                        btn.className = 'btn see-more-btn';
-                        btn.textContent = 'See More';
-                        btn.onclick = () => openProjectModal(project.moreInfo);
-                        imgContainer.appendChild(btn);
+                        imgContainer.appendChild(createSeeMoreButton('btn see-more-btn'));
                     }
 
                     li.appendChild(imgContainer);
                 });
             } else if (project.moreInfo) {
-                const btn = document.createElement('button');
-                btn.className = 'btn';
-                btn.textContent = 'See More';
-                btn.onclick = () => openProjectModal(project.moreInfo);
-                li.appendChild(btn);
+                li.appendChild(createSeeMoreButton('btn'));
             }
 
             const p = document.createElement('p');
@@ -151,8 +135,11 @@ async function openProjectModal(infoFile) {
         tabsHeader.appendChild(blogBtn);
         tabsHeader.appendChild(contribBtn);
         
-        // Load members data for references
-        const membersData = await getMembersData();
+        // Load members data for references (shared cache in loadMembers.js)
+        const membersData = await getAllMembers().catch(error => {
+            console.error("Could not load members data", error);
+            return null;
+        });
         
         // Populate Blog
         if (projectData.posts && projectData.posts.length > 0) {
@@ -293,17 +280,18 @@ async function openProjectModal(infoFile) {
 
 function setupModalClose() {
     const modal = document.getElementById('project-modal');
-    const closeBtn = document.querySelector('.close-modal');
-    
+    if (!modal || modal.dataset.listenerAttached) return;
+    modal.dataset.listenerAttached = 'true';
+
+    const closeBtn = modal.querySelector('.close-modal');
     if (closeBtn) {
-        closeBtn.onclick = function() {
-            if (modal) modal.classList.remove('show');
-        }
+        closeBtn.addEventListener('click', () => modal.classList.remove('show'));
     }
-    
-    window.onclick = function(event) {
+
+    // Clicking the backdrop (the modal element itself) also closes it
+    modal.addEventListener('click', (event) => {
         if (event.target === modal) {
             modal.classList.remove('show');
         }
-    }
+    });
 }

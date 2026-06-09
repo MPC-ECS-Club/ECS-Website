@@ -15,6 +15,6 @@ function hydrateLinks(root = document) {
     });
     root.querySelectorAll("[data-contact-email]").forEach(el => {
         el.href = "mailto:" + CONTACT_EMAIL;
+        el.textContent = CONTACT_EMAIL;
     });
-
 }
