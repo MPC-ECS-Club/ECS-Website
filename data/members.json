@@ -28,27 +28,9 @@
     "type": "officer"
   },
   {
-    "referenceTag": "spotOpen",
-    "name": "Spot Open",
-    "role": "Treasurer",
-    "major": "",
-    "image": "images/happy-caterpillar.webp",
-    "alt": "Treasurer photo",
-    "type": "officer"
-  },
-  {
-    "referenceTag": "jasonLam",
-    "name": "JASON LAM",
-    "role": "CS Lead",
-    "major": "Computer Science",
-    "image": "images/people/jason.webp",
-    "alt": "CS Lead Photo",
-    "type": "officer"
-  },
-  {
     "referenceTag": "sebastianRuedaVillamil",
     "name": "SEBASTIAN RUEDA",
-    "role": "CS Co-Lead",
+    "role": "Treasurer",
     "major": "Computer Science",
     "image": "images/people/sebastian-rueda.webp",
     "alt": "Co-CS Lead Photo",
@@ -57,13 +39,24 @@
     "redirect": "https://www.linkedin.com/in/sebastian-rueda-villamil/"
   },
   {
+    "referenceTag": "jasonLam",
+    "name": "JASON LAM",
+    "role": "CS Lead",
+    "major": "Computer Science",
+    "image": "images/people/jason.webp",
+    "alt": "CS Lead Photo",
+    "type": "officer",
+    "retired": true
+  },
+  {
     "referenceTag": "paoloMorales",
     "name": "PAOLO MORALES",
     "role": "Club Representative",
     "major": "Mechanical Engineering",
     "image": "images/people/paolo.webp",
     "alt": "Club Representative Photo",
-    "type": "officer"
+    "type": "officer",
+    "retired": true
   },
   {
     "referenceTag": "perlaGonzalez",
