@@ -39,11 +39,7 @@ const locationHandler = async () => {
     }
 
     try {
-        const response = await fetch(route.template);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        content.innerHTML = await response.text();
+        content.innerHTML = await fetchText(route.template);
     } catch (error) {
         console.error(`Failed to load ${route.template}:`, error);
         content.innerHTML = NOT_FOUND_HTML;

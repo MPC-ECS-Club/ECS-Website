@@ -11,11 +11,7 @@ function resolveContributor(ref, members) {
 
 async function loadProjects() {
     try {
-        const response = await fetch('data/projects.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const projects = await response.json();
+        const projects = await fetchJSON('data/projects.json');
 
         const container = document.getElementById('projects-container');
         if (!container) return; // Exit if container is not found
@@ -80,11 +76,7 @@ async function loadProjects() {
 
 async function openProjectModal(infoFile) {
     try {
-        const response = await fetch(`data/projects/${infoFile}`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const projectData = await response.json();
+        const projectData = await fetchJSON(`data/projects/${infoFile}`);
         
         const modal = document.getElementById('project-modal');
         const modalBody = document.getElementById('modal-body');

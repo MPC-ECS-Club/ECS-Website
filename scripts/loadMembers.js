@@ -1,15 +1,8 @@
 let showingRetired = false;
-let cachedAllMembers = null;
 
-//shared members cache; also used by loadProjects.js to resolve referenceTags
-async function getAllMembers() {
-    if (cachedAllMembers) return cachedAllMembers;
-    const response = await fetch('data/members.json');
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    cachedAllMembers = await response.json();
-    return cachedAllMembers;
+//also used by loadProjects.js to resolve referenceTags; fetchJSON memoizes it
+function getAllMembers() {
+    return fetchJSON('data/members.json');
 }
 
 function createMemberCard(person, { includeRedirect = false } = {}) {

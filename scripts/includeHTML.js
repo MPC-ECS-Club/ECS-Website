@@ -14,8 +14,7 @@ async function includeHTML(callback, root = document) {
         const file = elmnt.getAttribute("file-to-include");
         elmnt.removeAttribute("file-to-include");
         try {
-            const response = await fetch(file);
-            elmnt.innerHTML = response.ok ? await response.text() : "Page not found.";
+            elmnt.innerHTML = await fetchText(file);
         } catch (error) {
             console.error(`Failed to include ${file}:`, error);
             elmnt.innerHTML = "Page not found.";

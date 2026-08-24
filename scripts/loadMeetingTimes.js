@@ -3,11 +3,7 @@ async function loadMeetingTimes() {
     if (!list) return;
 
     try {
-        const response = await fetch('data/meeting_times.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
+        const data = await fetchJSON('data/meeting_times.json');
 
         const card = list.closest('.info-card');
         if (card && data.semester) {
